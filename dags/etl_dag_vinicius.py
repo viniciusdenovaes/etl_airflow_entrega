@@ -113,7 +113,7 @@ with DAG(
     schedule=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
     catchup=False,
-    tags=["try"],
+    tags=["raizen", "entrega"],
 ) as dag:
 
 
