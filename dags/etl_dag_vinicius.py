@@ -3,8 +3,8 @@ import datetime as dt
 import os
 
 
-from pyspark.sql.types import StructType, StructField, StringType, DoubleType, DateType, TimestampType
-from pyspark.sql import SparkSession
+# from pyspark.sql.types import StructType, StructField, StringType, DoubleType, DateType, TimestampType
+# from pyspark.sql import SparkSession
 
 
 from datetime import datetime, timedelta
@@ -17,9 +17,6 @@ from airflow.decorators import task
 # Operators; we need this to operate!
 from airflow.operators.bash import BashOperator
 
-
-# import my_packages.logger as logger_util
-# logger = logger_util.getLogger(__name__)
 
 
 def transform(table: pd.DataFrame) -> pd.DataFrame:
@@ -112,7 +109,7 @@ with DAG(
         # 'sla_miss_callback': yet_another_function,
         # 'trigger_rule': 'all_success'
     },
-    description="My try in xlsx",
+    description="etl for raizen using only pandas",
     schedule=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
     catchup=False,
@@ -120,20 +117,11 @@ with DAG(
 ) as dag:
 
 
-    xlsx_to_csv = BashOperator(
-        task_id='xlsx_to_csv',
+    xlsx_to_ods = BashOperator(
+        task_id='xlsx_to_ods',
         bash_command="soffice --headless --nologo --norestore --convert-to ods --outdir /tmp/ /tmp/vendas.xls",
     )
 
-    list_dir = BashOperator(
-        task_id="list_dir",
-        bash_command="ls /",
-    )
-
-    list_dir2 = BashOperator(
-        task_id="list_dir2",
-        bash_command="ls /tmp",
-    )
 
     download = BashOperator(
         task_id="download",
@@ -141,7 +129,7 @@ with DAG(
     )
 
 
-    list_dir >> download >> list_dir2 >> xlsx_to_csv
+    download >> xlsx_to_ods
 
 
     worksheets_names = {
@@ -152,7 +140,7 @@ with DAG(
     for name_item, name_sheet in worksheets_names.items():
 
 
-        @task(task_id=f'load_worksheet_for_{name_item}')
+        @task(task_id=f'load_transform_save_{name_item}')
         def load_transform_save():
             print(f'load_worksheet_for_{name_item}')
             pd_df = pd.read_excel('/tmp/vendas.ods', name_sheet)
@@ -164,7 +152,7 @@ with DAG(
             save(pd_df, '/tmp/')
 
         load_task = load_tasks[name_item] = load_transform_save()
-        xlsx_to_csv >> load_task
+        xlsx_to_ods >> load_task
 
 
 
