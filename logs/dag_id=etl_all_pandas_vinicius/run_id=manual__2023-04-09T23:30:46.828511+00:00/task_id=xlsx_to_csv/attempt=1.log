@@ -1,0 +1,33 @@
+[2023-04-09T23:30:54.812+0000] {taskinstance.py:1090} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_all_pandas_vinicius.xlsx_to_csv manual__2023-04-09T23:30:46.828511+00:00 [queued]>
+[2023-04-09T23:30:54.823+0000] {taskinstance.py:1090} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_all_pandas_vinicius.xlsx_to_csv manual__2023-04-09T23:30:46.828511+00:00 [queued]>
+[2023-04-09T23:30:54.823+0000] {taskinstance.py:1288} INFO - 
+--------------------------------------------------------------------------------
+[2023-04-09T23:30:54.823+0000] {taskinstance.py:1289} INFO - Starting attempt 1 of 6
+[2023-04-09T23:30:54.823+0000] {taskinstance.py:1290} INFO - 
+--------------------------------------------------------------------------------
+[2023-04-09T23:30:54.843+0000] {taskinstance.py:1309} INFO - Executing <Task(BashOperator): xlsx_to_csv> on 2023-04-09 23:30:46.828511+00:00
+[2023-04-09T23:30:54.850+0000] {standard_task_runner.py:55} INFO - Started process 132 to run task
+[2023-04-09T23:30:54.854+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'etl_all_pandas_vinicius', 'xlsx_to_csv', 'manual__2023-04-09T23:30:46.828511+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/etl_dag_vinicius.py', '--cfg-path', '/tmp/tmpuugj653w']
+[2023-04-09T23:30:54.855+0000] {standard_task_runner.py:83} INFO - Job 11: Subtask xlsx_to_csv
+[2023-04-09T23:30:54.913+0000] {task_command.py:389} INFO - Running <TaskInstance: etl_all_pandas_vinicius.xlsx_to_csv manual__2023-04-09T23:30:46.828511+00:00 [running]> on host c8c0de2c14c7
+[2023-04-09T23:30:54.984+0000] {taskinstance.py:1518} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=***@example.com
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=etl_all_pandas_vinicius
+AIRFLOW_CTX_TASK_ID=xlsx_to_csv
+AIRFLOW_CTX_EXECUTION_DATE=2023-04-09T23:30:46.828511+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-04-09T23:30:46.828511+00:00
+[2023-04-09T23:30:54.987+0000] {subprocess.py:63} INFO - Tmp dir root location: 
+ /tmp
+[2023-04-09T23:30:54.988+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'soffice --headless --nologo --norestore --convert-to ods --outdir /tmp/ /tmp/vendas.xls']
+[2023-04-09T23:30:55.001+0000] {subprocess.py:86} INFO - Output:
+[2023-04-09T23:30:55.861+0000] {subprocess.py:93} INFO - 
+[2023-04-09T23:30:55.862+0000] {subprocess.py:93} INFO - (process:203): dconf-CRITICAL **: 23:30:55.861: unable to create directory '/home/***/.cache/dconf': Permission denied.  dconf will not work properly.
+[2023-04-09T23:30:58.415+0000] {subprocess.py:93} INFO - 
+[2023-04-09T23:30:58.415+0000] {subprocess.py:93} INFO - (process:212): dconf-CRITICAL **: 23:30:58.415: unable to create directory '/home/***/.cache/dconf': Permission denied.  dconf will not work properly.
+[2023-04-09T23:30:59.635+0000] {subprocess.py:93} INFO - convert /tmp/vendas.xls -> /tmp/vendas.ods using filter : calc8
+[2023-04-09T23:31:01.320+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2023-04-09T23:31:01.363+0000] {taskinstance.py:1332} INFO - Marking task as SUCCESS. dag_id=etl_all_pandas_vinicius, task_id=xlsx_to_csv, execution_date=20230409T233046, start_date=20230409T233054, end_date=20230409T233101
+[2023-04-09T23:31:01.419+0000] {local_task_job.py:212} INFO - Task exited with return code 0
+[2023-04-09T23:31:01.451+0000] {taskinstance.py:2596} INFO - 2 downstream tasks scheduled from follow-on schedule check

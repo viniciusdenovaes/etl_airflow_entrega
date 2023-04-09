@@ -1,0 +1,8 @@
+# to begin
+sudo docker compose build
+sudo docker compose up airflow-init
+sudo docker compose up
+
+
+# to stop
+sudo docker compose down --volumes --rmi all
